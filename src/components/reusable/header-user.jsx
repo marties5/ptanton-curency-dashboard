@@ -12,14 +12,14 @@ const HeaderUser = () => {
     ""
   ) : (
     <div className="border-b border-slate-300 h-fit">
-      <div className="flex justify-between  max-w-[80vw] mx-auto py-2">
-        <Link href={"/"}>
+      <div className="flex justify-between  max-md:h-20 md:max-w-[80vw] px-4 mx-auto py-2">
+        <Link href={"/"} className="h-full flex items-center">
           <Image
             src={"/assets/logo-default.webp"}
             alt="logo-light-mode"
             height={60}
             width={200}
-            className="object-contain h-10"
+            className="object-contain md:h-10 h-8 w-24 md:w-fit"
           />
         </Link>
         <div className="flex items-center space-x-4">

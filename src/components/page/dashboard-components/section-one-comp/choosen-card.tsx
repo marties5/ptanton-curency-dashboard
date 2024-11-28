@@ -33,7 +33,10 @@ export const ChoosenCard = () => {
                   className="text-xs text-[#80BBCB] hover:underline"
                   href={"/"}
                 >
-                  <Badge variant={"primary"}>Moodku pilih ini</Badge>
+                  <Badge variant={"primary"} className="capitalize">
+                    <span className="md:block hidden mr-1">Moodku</span> pilih
+                    ini
+                  </Badge>
                 </Link>
               </CardTitle>
             </CardHeader>

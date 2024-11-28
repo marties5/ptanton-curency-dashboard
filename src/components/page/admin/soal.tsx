@@ -114,7 +114,9 @@ const Users = () => {
                     </TableCell>
                     <TableCell className="text-center">A</TableCell>
                     <TableCell>Paid</TableCell>
-                    <TableCell className="text-center">2 <span>Menit</span></TableCell>
+                    <TableCell className="text-center">
+                      2 <span>Menit</span>
+                    </TableCell>
                     <TableCell className="text-center">Sangat sulit</TableCell>
                     <TableCell className="flex space-x-1 items-center justify-center my-auto">
                       <Button className="px-2.5" variant={"outline"}>
