@@ -1,11 +1,6 @@
-
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const Soals = () => {
-  const getDataByCategory = ({ value }: string) => {
-    console.log(value);
-  };
+const Users = () => {
   return (
     <div className="w-full">
       <div className="mb-4">
@@ -16,9 +11,7 @@ const Soals = () => {
       </div>
       <Tabs defaultValue="pu">
         <TabsList className="grid w-full grid-cols-7">
-          <TabsTrigger value="pu">
-            <Button onClick={() => getDataByCategory("pu")}>PU</Button>
-          </TabsTrigger>
+          <TabsTrigger value="pu">PU</TabsTrigger>
           <TabsTrigger value="pm">PM</TabsTrigger>
           <TabsTrigger value="pk">PK</TabsTrigger>
           <TabsTrigger value="ppu">PPU</TabsTrigger>
@@ -38,4 +31,4 @@ const Soals = () => {
   );
 };
 
-export default Soals;
+export default Users;

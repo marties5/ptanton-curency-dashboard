@@ -24,7 +24,7 @@ import { LuInfo } from "react-icons/lu";
 import { MdOutlineDelete, MdOutlineRemoveRedEye } from "react-icons/md";
 import { PiGlobeX } from "react-icons/pi";
 
-const Users = () => {
+const Soal = () => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   const toggleText = () => {
@@ -164,4 +164,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Soal;
