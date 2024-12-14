@@ -4,11 +4,7 @@ import { LuCopyright } from "react-icons/lu";
 
 export const FooterUser = () => {
   const path = usePathname();
-  return ["admin", "login", "registrasi", "forgot", "test"].some((segment) =>
-    path.includes(segment)
-  ) ? (
-    ""
-  ) : (
+  return ["dashboard", ""].some((segment) => path.includes(segment)) ? (
     <footer className="md:h-96 h-44 border-t border-muted">
       <div className="md:max-w-[80vw]  mx-auto md:p-8 p-4 h-full flex flex-col">
         About
@@ -20,5 +16,7 @@ export const FooterUser = () => {
         </div>
       </div>
     </footer>
+  ) : (
+    ""
   );
 };

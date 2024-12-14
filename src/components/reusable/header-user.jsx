@@ -1,21 +1,20 @@
 "use client";
+import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
 
 const HeaderUser = () => {
+  const { theme, setTheme } = useTheme();
   const path = usePathname();
-  return ["admin", "login", "registrasi", "forgot"].some((segment) =>
-    path.includes(segment)
-  ) ? (
-    ""
-  ) : (
+  return ["dashboard", ""].some((segment) => path.includes(segment)) ? (
     <div className="border-b border-slate-300 h-fit">
       <div className="flex justify-between  max-md:h-20 md:max-w-[80vw] px-4 mx-auto py-2">
         <Link href={"/"} className="h-full flex items-center">
           <Image
-            src={"/assets/logo-default.webp"}
+            src={"/assets/logo.png"}
             alt="logo-light-mode"
             height={60}
             width={200}
@@ -23,6 +22,16 @@ const HeaderUser = () => {
           />
         </Link>
         <div className="flex items-center space-x-4">
+          <div className="flex justify-center items-center space-x-2 capitalize">
+            <Label htmlFor="theme-mode">{theme}</Label>
+            <Switch
+              id="theme-mode"
+              onCheckedChange={(checked) =>
+                checked ? setTheme("dark") : setTheme("light")
+              }
+            />
+          </div>
+          {/* 
           <Link
             href={"/login"}
             className="font-semibold tracking-wider hover:underline hover:underline-offset-8"
@@ -36,10 +45,12 @@ const HeaderUser = () => {
             >
               Daftar
             </Button>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>
+  ) : (
+    ""
   );
 };
 

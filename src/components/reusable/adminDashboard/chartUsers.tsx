@@ -16,12 +16,12 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface ChartInterface {
+export interface ChartInterface {
   nama: string;
   value: number;
 }
 
-export function ChartUsers(chartData: ChartInterface[]) {
+export function ChartUsers({ chartData }: { chartData: ChartInterface[] }) {
   return (
     <ChartContainer config={chartConfig} className="h-44 w-full">
       <BarChart accessibilityLayer data={chartData}>

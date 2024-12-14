@@ -1,4 +1,6 @@
 "use client";
+import * as React from "react";
+
 import GoogleAuth from "@/components/reusable/google-auth";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,9 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -30,8 +30,8 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { z } from "zod";
 
 const Login = () => {
-  const { toast } = useToast();
   const currentPath = usePathname();
+  const [error, setError] = React.useState(false);
 
   const FormSchema = z.object({
     email: z
@@ -48,17 +48,34 @@ const Login = () => {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "Login Berhasil",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      const responses = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email, password: data.password }),
+      });
 
-    console.log("Form Data:", data);
+      console.log("Response status:", responses.status);
+      const contentType = responses.headers.get("content-type");
+
+      if (contentType && contentType.includes("application/json")) {
+        const result = await responses.json();
+        if (responses.ok && result.success) {
+          alert("Login berhasil!");
+          localStorage.setItem("authToken", result.token);
+        } else {
+          alert(result.message || "Gagal login.");
+          setError(true);
+        }
+      } else {
+        console.error("Unexpected response type:", contentType);
+        alert("Terjadi kesalahan pada server.");
+      }
+    } catch (error) {
+      console.error("Error occurred during login:", error);
+      alert("Terjadi kesalahan pada server.");
+    }
   }
 
   return (
@@ -66,13 +83,6 @@ const Login = () => {
       <Form {...form}>
         <Card className="w-[400px]">
           <CardHeader>
-            <Image
-              src={"/assets/logo-default.webp"}
-              alt="logo"
-              width={100}
-              height={100}
-              className="py-6"
-            />
             <CardTitle aria-label="Login">
               <Link
                 href={"/"}
@@ -123,6 +133,11 @@ const Login = () => {
                     </FormItem>
                   )}
                 />
+                {error && (
+                  <p className="text-xs text-red-500 font-semibold">
+                    Invalid User or Password !
+                  </p>
+                )}
               </div>
               <CardFooter className="w-full flex flex-col mt-12 px-0">
                 <Button type="submit" className="w-full">
